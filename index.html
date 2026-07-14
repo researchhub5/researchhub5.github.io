@@ -396,15 +396,7 @@
                 category: "guide",
                 tags: ["methodology", "research"],
                 description: "Comprehensive guide to research methodology for graduate students."
-                { 
-        id: 11,
-        name: "Fikadu Thesis - Vitamin D Study in Sekota", 
-        date: "2026-07-14", 
-        size: "2.5 MB", 
-        category: "research",
-        tags: ["thesis", "vitamin D", "maternal health", "Ethiopia"],
-        description: "MPH thesis on knowledge, attitude, and practice towards vitamin D among mothers of under-five children in Sekota, Ethiopia."
-    }},
+            },
             { 
                 id: 2,
                 name: "Thesis Writing Template", 
@@ -485,6 +477,18 @@
                 category: "template",
                 tags: ["proposal", "research"],
                 description: "Complete template for writing a research proposal."
+            },
+            // ============================================================
+            // ADD YOUR NEW FILES HERE
+            // ============================================================
+            { 
+                id: 11,
+                name: "Fikadu Thesis - Vitamin D Study in Sekota", 
+                date: "2026-07-14", 
+                size: "1.76 MB", 
+                category: "research",
+                tags: ["thesis", "vitamin D", "maternal health", "Ethiopia", "MPH"],
+                description: "A community-based comparative study assessing knowledge, attitude, and practice towards vitamin D among mothers of under-five children in Sekota Town and Sekota Zuria, Amhara Region, Ethiopia."
             }
         ];
 
@@ -549,11 +553,25 @@
             localStorage.setItem('researchDownloads', downloadCount);
             document.getElementById('totalDownloads').textContent = downloadCount;
 
+            // Get the filename from the files array
+            const file = files.find(f => f.id === fileId);
+            let fileUrl = '#';
+            
+            // Map display names to actual filenames
+            if (fileId === 11) {
+                fileUrl = 'FIKADU%20THESIS1.pdf';
+            } else {
+                // For other files, create a URL with the name
+                fileUrl = fileName.replace(/ /g, '%20') + '.pdf';
+            }
+
             const link = document.createElement('a');
-            link.download = `${fileName}.pdf`;
-            link.href = '#';
+            link.download = fileUrl.split('/').pop();
+            link.href = fileUrl;
+            link.target = '_blank';
             link.click();
 
+            // Button feedback
             const cards = document.querySelectorAll('.file-card');
             cards.forEach(card => {
                 const btn = card.querySelector('.download-btn');
@@ -586,6 +604,7 @@
         renderFiles();
 
         console.log('📚 Research & Thesis Support Center loaded!');
+        console.log('📄 ' + files.length + ' files available');
         console.log('🔗 Join: https://t.me/reseacheraservice');
     </script>
 </body>
