@@ -3,528 +3,304 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Research & Thesis Support Center</title>
+    <title>Research & Thesis Support Center | Quality, Speed & Professionalism</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --primary: #1a237e;
             --secondary: #0d47a1;
             --accent: #42a5f5;
+            --green: #28a745;
             --bg-light: #f5f7fa;
             --text-dark: #1a1a2e;
             --text-gray: #546e7a;
             --shadow: 0 4px 20px rgba(0,0,0,0.08);
             --radius: 12px;
         }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: var(--bg-light);
-            color: var(--text-dark);
-            min-height: 100vh;
-        }
-        .hero {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 60px 20px 40px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(255,255,255,0.05), transparent 70%);
-            border-radius: 50%;
-        }
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        .hero-badge {
-            display: inline-block;
-            background: rgba(255,255,255,0.15);
-            padding: 6px 20px;
-            border-radius: 50px;
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            backdrop-filter: blur(10px);
-            margin-bottom: 15px;
-        }
-        .hero h1 {
-            font-size: 2.8rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-        .hero p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto 20px;
-        }
-        .hero-stats {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            flex-wrap: wrap;
-            margin: 20px 0 25px;
-        }
-        .hero-stat {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.1rem;
-        }
-        .hero-stat .number {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: #64b5f6;
-        }
-        .telegram-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 32px;
-            background: #0088cc;
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-        .telegram-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(0,136,204,0.4);
-        }
-        .container {
-            max-width: 1200px;
-            margin: -20px auto 40px;
-            padding: 0 20px;
-            position: relative;
-            z-index: 2;
-        }
-        .search-section {
-            background: white;
-            padding: 25px 30px;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            margin-bottom: 25px;
-        }
-        .search-input {
-            width: 100%;
-            padding: 14px 20px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            outline: none;
-            background: var(--bg-light);
-        }
-        .search-input:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 4px rgba(66,165,245,0.1);
-        }
-        .filter-chips {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        .filter-chip {
-            padding: 8px 20px;
-            background: var(--bg-light);
-            border: 2px solid #e0e0e0;
-            border-radius: 50px;
-            color: var(--text-gray);
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: inherit;
-        }
-        .filter-chip:hover {
-            border-color: var(--accent);
-            color: var(--primary);
-        }
-        .filter-chip.active {
-            background: var(--primary);
-            border-color: var(--primary);
-            color: white;
-        }
-        .file-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 20px;
-        }
-        .file-card {
-            background: white;
-            border-radius: 12px;
-            padding: 22px 24px;
-            box-shadow: var(--shadow);
-            transition: all 0.3s ease;
-            border-left: 4px solid var(--primary);
-            display: flex;
-            flex-direction: column;
-        }
-        .file-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-        }
-        .file-card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 8px;
-        }
-        .file-card-title {
-            font-size: 1.05rem;
-            font-weight: 700;
-            color: var(--text-dark);
-        }
-        .file-card-category {
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            padding: 3px 14px;
-            border-radius: 50px;
-            background: rgba(26,35,126,0.08);
-            color: var(--primary);
-            white-space: nowrap;
-        }
-        .file-card-meta {
-            display: flex;
-            gap: 16px;
-            color: var(--text-gray);
-            font-size: 0.85rem;
-            margin: 4px 0 12px;
-        }
-        .file-card-meta span {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-        .file-card-desc {
-            color: var(--text-gray);
-            font-size: 0.9rem;
-            margin-bottom: 14px;
-            flex: 1;
-            line-height: 1.5;
-        }
-        .file-card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 14px;
-            border-top: 1px solid #eee;
-        }
-        .file-card-tags {
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
-        .file-card-tags span {
-            font-size: 0.7rem;
-            padding: 3px 12px;
-            background: var(--bg-light);
-            border-radius: 50px;
-            color: var(--text-gray);
-        }
-        .download-btn {
-            padding: 8px 22px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: inherit;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .download-btn:hover {
-            background: var(--secondary);
-            transform: scale(1.04);
-        }
-        .download-btn.downloaded {
-            background: #2e7d32;
-        }
-        .no-results {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 60px 20px;
-            color: var(--text-gray);
-        }
-        .no-results .icon {
-            font-size: 3rem;
-            margin-bottom: 12px;
-        }
-        .no-results h3 {
-            color: var(--text-dark);
-            margin-bottom: 4px;
-        }
-        .footer {
-            text-align: center;
-            padding: 30px 20px;
-            color: var(--text-gray);
-            font-size: 0.85rem;
-            border-top: 1px solid #e0e0e0;
-            margin-top: 20px;
-        }
-        .footer a {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg-light); color: var(--text-dark); line-height: 1.6; }
+        
+        /* Navigation */
+        header { background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+        nav { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 1rem 20px; }
+        .logo { font-size: 1.2rem; font-weight: bold; color: var(--primary); display: flex; align-items: center; gap: 8px; }
+        .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text-dark); font-weight: 600; font-size: 0.95rem; }
+        .nav-links a:hover { color: var(--accent); }
+
+        /* Hero */
+        .hero { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 60px 20px 50px; text-align: center; position: relative; }
+        .hero-content { max-width: 900px; margin: 0 auto; }
+        .hero-badge { display: inline-block; background: rgba(255,255,255,0.15); padding: 6px 20px; border-radius: 50px; font-size: 13px; font-weight: 600; letter-spacing: 1px; margin-bottom: 15px; }
+        .hero h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; }
+        .hero p.tagline { font-size: 1.2rem; color: var(--accent); font-weight: bold; margin-bottom: 15px; }
+        .hero p.desc { font-size: 1.05rem; opacity: 0.9; max-width: 700px; margin: 0 auto 25px; }
+        .hero-stats { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin: 20px 0 30px; }
+        .hero-stat .number { font-size: 1.8rem; font-weight: 800; color: #64b5f6; }
+        
+        .cta-btns { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+        .telegram-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; background: #0088cc; color: white; text-decoration: none; border-radius: 50px; font-weight: 700; transition: transform 0.2s, box-shadow 0.2s; }
+        .telegram-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,136,204,0.3); }
+
+        /* Sections */
+        .section-container { max-width: 1200px; margin: 50px auto; padding: 0 20px; }
+        .section-title { text-align: center; font-size: 2rem; color: var(--primary); margin-bottom: 30px; position: relative; }
+        .section-title::after { content: ''; width: 60px; height: 3px; background: var(--accent); position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%); }
+
+        /* Grid Cards */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+        .card { background: white; padding: 24px; border-radius: var(--radius); border-left: 4px solid var(--primary); box-shadow: var(--shadow); }
+        .card h3 { color: var(--primary); margin-bottom: 12px; font-size: 1.1rem; }
+        .card ul { list-style: none; }
+        .card ul li { margin-bottom: 8px; position: relative; padding-left: 20px; font-size: 0.95rem; color: var(--text-gray); }
+        .card ul li::before { content: "✓"; color: var(--green); position: absolute; left: 0; font-weight: bold; }
+
+        /* Process Steps */
+        .process-steps { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 15px; }
+        .step { flex: 1; min-width: 200px; background: white; padding: 20px; text-align: center; border-radius: var(--radius); box-shadow: var(--shadow); }
+        .step-number { background: var(--primary); color: white; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px auto; font-weight: bold; }
+
+        /* Repository / Search */
+        .search-section { background: white; padding: 25px; border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 25px; }
+        .search-input { width: 100%; padding: 14px 20px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 1rem; outline: none; background: var(--bg-light); }
+        .search-input:focus { border-color: var(--accent); }
+        .filter-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
+        .filter-chip { padding: 8px 18px; background: var(--bg-light); border: 2px solid #e0e0e0; border-radius: 50px; color: var(--text-gray); font-size: 0.85rem; font-weight: 600; cursor: pointer; }
+        .filter-chip.active { background: var(--primary); border-color: var(--primary); color: white; }
+
+        .file-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+        .file-card { background: white; border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow); border-left: 4px solid var(--primary); display: flex; flex-direction: column; }
+        .file-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+        .file-card-title { font-size: 1.05rem; font-weight: 700; }
+        .file-card-category { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; padding: 3px 12px; border-radius: 50px; background: rgba(26,35,126,0.08); color: var(--primary); }
+        .file-card-meta { display: flex; gap: 16px; color: var(--text-gray); font-size: 0.85rem; margin: 4px 0 12px; }
+        .file-card-desc { color: var(--text-gray); font-size: 0.9rem; margin-bottom: 14px; flex: 1; }
+        .file-card-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 14px; border-top: 1px solid #eee; }
+        .file-card-tags span { font-size: 0.7rem; padding: 3px 10px; background: var(--bg-light); border-radius: 50px; color: var(--text-gray); }
+        .download-btn { padding: 8px 18px; background: var(--primary); color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: background 0.2s; }
+        .download-btn:hover { background: var(--secondary); }
+
+        /* Contact Section */
+        .contact-box { background: var(--primary); color: white; text-align: center; border-radius: var(--radius); padding: 40px 20px; margin-top: 50px; }
+        .contact-details { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin: 20px 0; font-size: 1.05rem; }
+        .contact-details a { color: var(--accent); text-decoration: none; font-weight: 600; }
+
+        .footer { text-align: center; padding: 30px 20px; color: var(--text-gray); font-size: 0.85rem; border-top: 1px solid #e0e0e0; margin-top: 40px; }
+        
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2rem; }
-            .hero-stats { gap: 20px; }
-            .hero-stat .number { font-size: 1.4rem; }
-            .file-grid { grid-template-columns: 1fr; }
-            .search-section { padding: 18px 16px; }
-            .file-card-footer {
-                flex-direction: column;
-                gap: 12px;
-                align-items: stretch;
-            }
-            .download-btn { justify-content: center; }
-        }
-        @media (max-width: 480px) {
-            .hero { padding: 40px 16px 30px; }
-            .hero h1 { font-size: 1.6rem; }
-            .container { padding: 0 12px; }
-            .filter-chips { gap: 6px; }
-            .filter-chip { font-size: 0.75rem; padding: 6px 14px; }
+            .nav-links { display: none; }
+            .hero h1 { font-size: 1.8rem; }
+            .process-steps { flex-direction: column; }
         }
     </style>
 </head>
 <body>
 
-    <header class="hero">
+    <header>
+        <nav>
+            <div class="logo">📊 Research & Thesis Support Center</div>
+            <ul class="nav-links">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#expertise">Expertise</a></li>
+                <li><a href="#process">Process</a></li>
+                <li><a href="#repository">Repository</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="https://t.me/Researcher_servicess" target="_blank" class="telegram-btn">Contact Us</a>
+        </nav>
+    </header>
+
+    <div class="hero">
         <div class="hero-content">
-            <div class="hero-badge">📚 RESEARCH &amp; DATA HUB</div>
-            <h1>Academic Resource Repository</h1>
-            <p>
-                Download proven academic templates, quantitative data toolkits, 
-                structured writing checklists, and reference guides to elevate 
-                your thesis quality.
-            </p>
+            <div class="hero-badge">📚 ACADEMIC RESEARCH & DATA HUB</div>
+            <h1>Professional Academic Support Services</h1>
+            <p class="tagline">Quality | Speed | Professionalism</p>
+            <p class="desc">End-to-end guidance for undergraduate, MSc/MA, and PhD students in Ethiopia. Fast, accurate, humanized, and ethical research assistance.</p>
 
             <div class="hero-stats">
                 <div class="hero-stat">
-                    <span>📄</span>
-                    <span class="number" id="totalFiles">0</span>
-                    <span>Resources</span>
+                    <span class="number">1,000+</span><br/><span>Theses Completed</span>
                 </div>
                 <div class="hero-stat">
-                    <span>👥</span>
-                    <span class="number">8,814</span>
-                    <span>Subscribers</span>
+                    <span class="number">10,000+</span><br/><span>Students Supported</span>
                 </div>
                 <div class="hero-stat">
-                    <span>⬇️</span>
-                    <span class="number" id="totalDownloads">0</span>
-                    <span>Downloads</span>
+                    <span class="number">95%</span><br/><span>Client Satisfaction</span>
                 </div>
             </div>
 
-            <a href="https://t.me/reseacheraservice" target="_blank" class="telegram-btn">
-                📱 Join Our Telegram Channel
-            </a>
-            <a href="https://t.me/Research_Support_Center_bot" target="_blank" class="telegram-btn" style="background:#9c27b0; margin-top:10px;">
-    🤖 Get Access via Telegram Bot
-</a>
+            <div class="cta-btns">
+                <a href="https://t.me/Researcher_servicess" target="_blank" class="telegram-btn">📱 Contact via Telegram</a>
+                <a href="https://t.me/Research_Support_Center_bot" target="_blank" class="telegram-btn" style="background:#9c27b0;">🤖 Telegram Bot</a>
+            </div>
         </div>
-    </header>
+    </div>
 
-    <div class="container">
+    <!-- Core Services -->
+    <div class="section-container" id="services">
+        <h2 class="section-title">Our Professional Services</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Research Proposals</h3>
+                <ul>
+                    <li>Title Selection & Refinement</li>
+                    <li>Problem Statement Formulation</li>
+                    <li>Literature Review Development</li>
+                    <li>Study Design & Methodology</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Thesis & Dissertation Support</h3>
+                <ul>
+                    <li>Chapter-by-Chapter Guidance</li>
+                    <li>Content Review & Feedback</li>
+                    <li>Structure & Flow Improvement</li>
+                    <li>Final Formatting & Submission</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Data Analysis & Econometrics</h3>
+                <ul>
+                    <li>Quantitative (SPSS, STATA, Excel)</li>
+                    <li>Qualitative (NVivo, Thematic Analysis)</li>
+                    <li>Statistical Interpretation & Charts</li>
+                    <li>Results & Discussion Drafting</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>AI Humanization & Plagiarism</h3>
+                <ul>
+                    <li>Plagiarism Check & Reduction</li>
+                    <li>AI Text Humanization & Editing</li>
+                    <li>Citations (APA, Harvard, Vancouver)</li>
+                    <li>Journal Article Preparation</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Areas of Expertise -->
+    <div class="section-container" id="expertise">
+        <h2 class="section-title">Areas of Expertise</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Business & Economics</h3>
+                <ul>
+                    <li>Accounting & Finance</li>
+                    <li>Business Administration</li>
+                    <li>Development Economics & Econometrics</li>
+                    <li>Supply Chain & HR Management</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Health Sciences</h3>
+                <ul>
+                    <li>Public Health & Epidemiology</li>
+                    <li>Nursing (Adult, Pediatric, Maternity, KMC)</li>
+                    <li>Pediatrics, Nutrition & Psychiatry</li>
+                    <li>Anesthesia & Emergency Medicine</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Social & Natural Sciences</h3>
+                <ul>
+                    <li>Psychology & Sociology</li>
+                    <li>Law & Legal Research</li>
+                    <li>Environmental Science & Agriculture</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Workflow Process -->
+    <div class="section-container" id="process">
+        <h2 class="section-title">Our Process</h2>
+        <div class="process-steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h4>Consultation</h4>
+                <p>Free assessment of your research topic and needs.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h4>Quote & Timeline</h4>
+                <p>Clear pricing and agreed submission deadline.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h4>Execution</h4>
+                <p>Rigorous drafting with steady progress updates.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <h4>Review</h4>
+                <p>Revisions based on your supervisor's feedback.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">5</div>
+                <h4>Final Delivery</h4>
+                <p>Final delivery with post-submission guidance.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Free Resource Repository -->
+    <div class="section-container" id="repository">
+        <h2 class="section-title">Free Academic Repository</h2>
         <div class="search-section">
-            <input 
-                type="text" 
-                class="search-input" 
-                id="searchInput" 
-                placeholder="🔍 Search templates, writing checklists, datasets, file formats..."
-            />
-
+            <input type="text" class="search-input" id="searchInput" placeholder="🔍 Search templates, guides, datasets..." />
             <div class="filter-chips" id="filterChips">
                 <button class="filter-chip active" data-filter="all">📋 All</button>
                 <button class="filter-chip" data-filter="guide">📘 Guides</button>
                 <button class="filter-chip" data-filter="template">📄 Templates</button>
                 <button class="filter-chip" data-filter="examples">📊 Examples</button>
                 <button class="filter-chip" data-filter="research">🔬 Research</button>
-                <button class="filter-chip" data-filter="tutorial">🎓 Tutorials</button>
-                <button class="filter-chip" data-filter="tips">💡 Tips</button>
             </div>
         </div>
-
         <div class="file-grid" id="fileGrid"></div>
     </div>
 
+    <!-- Contact & Footer -->
+    <div class="section-container" id="contact">
+        <div class="contact-box">
+            <h2>Let's Work Together</h2>
+            <div class="contact-details">
+                <div>📞 Phone: <a href="tel:+251972661028">+251 972 661 028</a></div>
+                <div>✉️ Email: <a href="mailto:nafhund@gmail.com">nafhund@gmail.com</a></div>
+                <div>💬 Telegram: <a href="https://t.me/Researcher_servicess">@Researcher_servicess</a></div>
+            </div>
+            <a href="https://t.me/+tjP08iEcaK9mY2Zk" target="_blank" class="telegram-btn" style="background:#fff; color:var(--primary);">Join Our Telegram Channel</a>
+        </div>
+    </div>
+
     <footer class="footer">
-        <p>
-            © 2024 Research &amp; Thesis Support Center &mdash; 
-            <a href="https://t.me/reseacheraservice" target="_blank">Join our Telegram</a>
-        </p>
-        <p style="font-size: 0.75rem; margin-top: 6px; opacity: 0.6;">
-            All materials are for educational and research purposes only.
-        </p>
+        <p>© 2026 Research & Thesis Support Center — researchhub5.github.io</p>
     </footer>
 
     <script>
-        // ============================================================
-        // FILE DATABASE — Add your files here
-        // ============================================================
         const files = [
-            { 
-                id: 1,
-                name: "Research Methodology Guide", 
-                date: "2024-01-15", 
-                size: "2.4 MB", 
-                category: "guide",
-                tags: ["methodology", "research"],
-                description: "Comprehensive guide to research methodology for graduate students."
-            },
-            { 
-                id: 2,
-                name: "Thesis Writing Template", 
-                date: "2024-01-10", 
-                size: "1.8 MB", 
-                category: "template",
-                tags: ["thesis", "formatting"],
-                description: "Ready-to-use template for thesis and dissertation writing."
-            },
-            { 
-                id: 3,
-                name: "Literature Review Examples", 
-                date: "2024-01-05", 
-                size: "3.2 MB", 
-                category: "examples",
-                tags: ["literature", "review"],
-                description: "Collection of literature review examples across various disciplines."
-            },
-            { 
-                id: 4,
-                name: "Statistical Analysis Guide", 
-                date: "2024-01-01", 
-                size: "4.1 MB", 
-                category: "guide",
-                tags: ["statistics", "data-analysis"],
-                description: "Step-by-step guide to statistical analysis for research."
-            },
-            { 
-                id: 5,
-                name: "APA Citation Guide", 
-                date: "2023-12-28", 
-                size: "1.2 MB", 
-                category: "guide",
-                tags: ["APA", "citation"],
-                description: "Complete APA 7th edition citation and formatting guide."
-            },
-            { 
-                id: 6,
-                name: "Qualitative Research Methods", 
-                date: "2023-12-20", 
-                size: "5.3 MB", 
-                category: "research",
-                tags: ["qualitative", "interviews"],
-                description: "In-depth exploration of qualitative research methodologies."
-            },
-            { 
-                id: 7,
-                name: "Quantitative Data Analysis", 
-                date: "2023-12-15", 
-                size: "3.8 MB", 
-                category: "research",
-                tags: ["quantitative", "data"],
-                description: "Practical guide to quantitative data analysis techniques."
-            },
-            { 
-                id: 8,
-                name: "Dissertation Structure Guide", 
-                date: "2023-12-10", 
-                size: "2.1 MB", 
-                category: "guide",
-                tags: ["dissertation", "structure"],
-                description: "Detailed guide on structuring your dissertation effectively."
-            },
-            { 
-                id: 9,
-                name: "Academic Writing Tips", 
-                date: "2023-12-05", 
-                size: "1.5 MB", 
-                category: "tips",
-                tags: ["writing", "academic"],
-                description: "Essential tips for improving your academic writing skills."
-            },
-            { 
-                id: 10,
-                name: "Research Proposal Template", 
-                date: "2023-12-01", 
-                size: "2.9 MB", 
-                category: "template",
-                tags: ["proposal", "research"],
-                description: "Complete template for writing a research proposal."
-            },
-            // ============================================================
-            // ADD YOUR NEW FILES HERE
-            // ============================================================
-            { 
-                id: 11,
-                name: "Fikadu Thesis - Vitamin D Study in Sekota", 
-                date: "2026-07-14", 
-                size: "1.76 MB", 
-                category: "research",
-                tags: ["thesis", "vitamin D", "maternal health", "Ethiopia", "MPH"],
-                description: "A community-based comparative study assessing knowledge, attitude, and practice towards vitamin D among mothers of under-five children in Sekota Town and Sekota Zuria, Amhara Region, Ethiopia."
-            }
+            { id: 1, name: "Research Methodology Guide", date: "2026-01-15", size: "2.4 MB", category: "guide", tags: ["methodology"], description: "Comprehensive guide to research methodology." },
+            { id: 2, name: "Thesis Writing Template", date: "2026-01-10", size: "1.8 MB", category: "template", tags: ["formatting"], description: "Ready-to-use template for thesis structure." },
+            { id: 3, name: "Literature Review Examples", date: "2026-01-05", size: "3.2 MB", category: "examples", tags: ["review"], description: "Sample literature reviews across academic fields." },
+            { id: 4, name: "Statistical Analysis Guide", date: "2026-01-01", size: "4.1 MB", category: "guide", tags: ["statistics"], description: "Step-by-step SPSS and STATA guide." },
+            { id: 11, name: "Fikadu Thesis - Vitamin D Study", date: "2026-07-14", size: "1.76 MB", category: "research", tags: ["health", "thesis"], description: "Comparative study assessing knowledge, attitude, and practice towards vitamin D." }
         ];
-
-        let downloadCount = parseInt(localStorage.getItem('researchDownloads')) || 0;
-        document.getElementById('totalDownloads').textContent = downloadCount;
 
         let currentFilter = 'all';
         let currentSearch = '';
 
         function renderFiles() {
             const grid = document.getElementById('fileGrid');
-            
             const filtered = files.filter(file => {
                 const matchesCategory = currentFilter === 'all' || file.category === currentFilter;
                 const searchLower = currentSearch.toLowerCase().trim();
                 const matchesSearch = searchLower === '' || 
                     file.name.toLowerCase().includes(searchLower) ||
-                    file.category.toLowerCase().includes(searchLower) ||
-                    file.tags.some(tag => tag.toLowerCase().includes(searchLower)) ||
                     file.description.toLowerCase().includes(searchLower);
                 return matchesCategory && matchesSearch;
             });
 
-            document.getElementById('totalFiles').textContent = filtered.length;
-
             if (filtered.length === 0) {
-                grid.innerHTML = `
-                    <div class="no-results">
-                        <div class="icon">🔍</div>
-                        <h3>No files found</h3>
-                        <p>Try adjusting your search or filter criteria</p>
-                    </div>
-                `;
+                grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--text-gray);">No files found</div>`;
                 return;
             }
 
@@ -540,54 +316,20 @@
                     </div>
                     <p class="file-card-desc">${file.description}</p>
                     <div class="file-card-footer">
-                        <div class="file-card-tags">
-                            ${file.tags.map(tag => `<span>#${tag}</span>`).join('')}
-                        </div>
-                        <button class="download-btn" onclick="handleDownload('${file.name}', ${file.id})">
-                            ⬇ Download
-                        </button>
+                        <div class="file-card-tags">${file.tags.map(t => `<span>#${t}</span>`).join('')}</div>
+                        <button class="download-btn" onclick="handleDownload('${file.name}', ${file.id})">⬇ Download</button>
                     </div>
                 </div>
             `).join('');
         }
 
         function handleDownload(fileName, fileId) {
-            downloadCount++;
-            localStorage.setItem('researchDownloads', downloadCount);
-            document.getElementById('totalDownloads').textContent = downloadCount;
-
-            // Get the filename from the files array
-            const file = files.find(f => f.id === fileId);
-            let fileUrl = '#';
-            
-            // Map display names to actual filenames
-            if (fileId === 11) {
-                fileUrl = 'FIKADU%20THESIS1.pdf';
-            } else {
-                // For other files, create a URL with the name
-                fileUrl = fileName.replace(/ /g, '%20') + '.pdf';
-            }
-
+            let fileUrl = (fileId === 11) ? 'FIKADU%20THESIS1.pdf' : fileName.replace(/ /g, '%20') + '.pdf';
             const link = document.createElement('a');
             link.download = fileUrl.split('/').pop();
             link.href = fileUrl;
             link.target = '_blank';
             link.click();
-
-            // Button feedback
-            const cards = document.querySelectorAll('.file-card');
-            cards.forEach(card => {
-                const btn = card.querySelector('.download-btn');
-                if (btn && btn.textContent.includes('Download')) {
-                    const originalText = btn.textContent;
-                    btn.textContent = '✅ Downloaded!';
-                    btn.classList.add('downloaded');
-                    setTimeout(() => {
-                        btn.textContent = originalText;
-                        btn.classList.remove('downloaded');
-                    }, 2500);
-                }
-            });
         }
 
         document.getElementById('searchInput').addEventListener('input', function() {
@@ -605,10 +347,6 @@
         });
 
         renderFiles();
-
-        console.log('📚 Research & Thesis Support Center loaded!');
-        console.log('📄 ' + files.length + ' files available');
-        console.log('🔗 Join: https://t.me/reseacheraservice');
     </script>
 </body>
 </html>
