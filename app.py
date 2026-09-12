@@ -1,4 +1,4 @@
-import os
+ import os
 import logging
 from flask import Flask
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
@@ -6,9 +6,10 @@ from telegram.ext import Application, CommandHandler, CallbackQueryHandler, Cont
 import threading
 
 # ============ YOUR SETTINGS ============
-BOT_TOKEN = "7809043358:AAG0BNLgcCCn6KeHIc7WaDJMOPjIj8mst6E"
+BOT_TOKEN = "866677791:AAEFGJe9lPLB90zTWu6uFwmmaEDOg5Rp6s8"
 CHANNEL_USERNAME = "reseacheraservice"
 WEBSITE_URL = "https://researchhub5.github.io"
+BOT_USERNAME = "Research_Support_Center_bot"
 # =======================================
 
 logging.basicConfig(level=logging.INFO)
@@ -80,7 +81,7 @@ def run_telegram_bot():
     application = Application.builder().token(BOT_TOKEN).build()
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CallbackQueryHandler(check, pattern="check"))
-    print("🤖 Bot is running! Send /start to @Research_Thesis_Support_bot")
+    print(f"🤖 Bot is running! Send /start to @{BOT_USERNAME}")
     application.run_polling()
 
 # Start both the web server and the bot
