@@ -91,6 +91,31 @@
             .hero h1 { font-size: 1.8rem; }
             .process-steps { flex-direction: column; }
         }
+
+        /* --- Telegram join-gate modal --- */
+        #telegram-gate-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+        #telegram-gate-modal .gate-box {
+            background: white;
+            padding: 32px;
+            border-radius: var(--radius);
+            max-width: 380px;
+            width: 90%;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+        #telegram-gate-modal h3 { color: var(--primary); margin-bottom: 10px; }
+        #telegram-gate-modal p { color: var(--text-gray); font-size: 14px; margin-bottom: 16px; }
+        #gate-status { margin-top: 16px; font-size: 13px; color: var(--text-dark); }
+        #gate-status a { color: var(--accent); font-weight: 600; }
+        .gate-cancel-btn { margin-top: 14px; background: none; border: none; color: #999; cursor: pointer; font-size: 13px; }
     </style>
 </head>
 <body>
@@ -277,6 +302,98 @@
         <p>© 2026 Research & Thesis Support Center — researchhub5.github.io</p>
     </footer>
 
+    <!-- ============================================================= -->
+    <!-- TELEGRAM JOIN-GATE — added so downloads require channel membership -->
+    <!-- ============================================================= -->
+    <script src="https://telegram.org/js/telegram-widget.js?22"></script>
+
+    <div id="telegram-gate-modal">
+        <div class="gate-box">
+            <h3>Join our channel to download</h3>
+            <p>Log in with Telegram to verify you've joined <strong>@reseacheraservice</strong>.</p>
+
+            <script
+                async
+                src="https://telegram.org/js/telegram-widget.js?22"
+                data-telegram-login="Research_Support_Center_bot"
+                data-size="large"
+                data-onauth="onTelegramAuth(user)"
+                data-request-access="write"
+            ></script>
+
+            <p id="gate-status"></p>
+            <button class="gate-cancel-btn" onclick="closeGateModal()">Cancel</button>
+        </div>
+    </div>
+
+    <script>
+        // ---- CONFIG: edit BOUNCER_URL after you deploy the Cloudflare Worker ----
+        const BOUNCER_URL = "https://YOUR-WORKER-NAME.YOUR-SUBDOMAIN.workers.dev";
+        const CHANNEL_URL = "https://t.me/+tjP08iEcaK9mY2Zk";
+        // --------------------------------------------------------------------------
+
+        let verifiedThisSession = false;
+        let pendingFileUrl = null;
+
+        window.onTelegramAuth = async function (user) {
+            const statusEl = document.getElementById("gate-status");
+            statusEl.textContent = "Checking your channel membership...";
+
+            try {
+                const res = await fetch(BOUNCER_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(user),
+                });
+                const result = await res.json();
+
+                if (result.allowed) {
+                    verifiedThisSession = true;
+                    statusEl.textContent = "✅ Verified! Your download will start now.";
+                    setTimeout(() => {
+                        closeGateModal();
+                        if (pendingFileUrl) {
+                            triggerActualDownload(pendingFileUrl);
+                            pendingFileUrl = null;
+                        }
+                    }, 700);
+                } else {
+                    statusEl.innerHTML =
+                        '❌ You must join our channel first. <a href="' + CHANNEL_URL +
+                        '" target="_blank">Join here</a>, then try again.';
+                }
+            } catch (err) {
+                statusEl.textContent = "⚠️ Something went wrong. Please try again.";
+                console.error(err);
+            }
+        };
+
+        function requestDownload(fileUrl) {
+            if (verifiedThisSession) {
+                triggerActualDownload(fileUrl);
+                return;
+            }
+            pendingFileUrl = fileUrl;
+            document.getElementById("gate-status").textContent = "";
+            document.getElementById("telegram-gate-modal").style.display = "flex";
+        }
+
+        function closeGateModal() {
+            document.getElementById("telegram-gate-modal").style.display = "none";
+        }
+
+        function triggerActualDownload(fileUrl) {
+            const link = document.createElement('a');
+            link.download = fileUrl.split('/').pop();
+            link.href = fileUrl;
+            link.target = '_blank';
+            link.click();
+        }
+    </script>
+    <!-- ============================================================= -->
+    <!-- END TELEGRAM JOIN-GATE                                          -->
+    <!-- ============================================================= -->
+
     <script>
         const files = [
             { id: 1, name: "Research Methodology Guide", date: "2026-01-15", size: "2.4 MB", category: "guide", tags: ["methodology"], description: "Comprehensive guide to research methodology.", fileName: "Research Methodology Guide.pdf" },
@@ -345,11 +462,8 @@
                 ? fileTarget 
                 : encodeURIComponent(fileTarget) + '.pdf';
 
-            const link = document.createElement('a');
-            link.download = fileUrl.split('/').pop();
-            link.href = fileUrl;
-            link.target = '_blank';
-            link.click();
+            // Gate the download behind Telegram channel membership
+            requestDownload(fileUrl);
         }
 
         document.getElementById('searchInput').addEventListener('input', function() {
