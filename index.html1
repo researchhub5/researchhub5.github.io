@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional Academic & Research Support Services in Ethiopia. Thesis guidance, data analysis, proposal development, and academic editing.">
+    <title>Research & Thesis Support Center</title>
+    <style>
+        :root {
+            --primary-color: #0b5ed7;
+            --primary-dark: #0a4b9c;
+            --secondary-color: #198754;
+            --accent-color: #f8f9fa;
+            --text-color: #212529;
+            --text-muted: #6c757d;
+            --border-color: #e9ecef;
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: #ffffff;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: #ffffff;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0b5ed7 0%, #0a4b9c 100%);
+            color: white;
+            padding: 4rem 1rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 2rem auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .btn-primary {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #146c43;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 1rem;
+        }
+
+        /* Stats Bar */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+            background: var(--accent-color);
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* Section Formatting */
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--primary-color);
+            margin: 0.5rem auto 0 auto;
+            border-radius: 2px;
+        }
+
+        /* Services Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.75rem;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+        }
+
+        .card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .card ul {
+            list-style-type: none;
+        }
+
+        .card ul li {
+            padding: 0.4rem 0;
+            border-bottom: 1px dashed var(--border-color);
+            font-size: 0.95rem;
+        }
+
+        .card ul li:last-child {
+            border-bottom: none;
+        }
+
+        /* Process Steps */
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .step-box {
+            background: var(--accent-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .step-number {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Contact Section */
+        .contact-card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2.5rem;
+            box-shadow: var(--card-shadow);
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .contact-item {
+            font-size: 1rem;
+        }
+
+        .contact-item strong {
+            display: block;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #111827;
+            color: #9ca3af;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 4rem;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Navigation */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            nav ul {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="brand-logo">Research & Thesis Support Center</a>
+            <nav>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#expertise">Expertise</a></li>
+                    <li><a href="#process">Process</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="hero">
+        <h1>Professional Academic & Research Services</h1>
+        <p>Providing high-quality research assistance, thesis guidance, and statistical analysis for undergraduate, MSc/MA, and PhD scholars.</p>
+        <div class="cta-buttons">
+            <a href="https://t.me/Researcher_servicess" class="btn btn-primary" target="_blank">Contact on Telegram</a>
+            <a href="tel:+251972661028" class="btn btn-outline">Call +251 972 661 028</a>
+        </div>
+    </section>
+
+    <div class="container">
+
+        <!-- Performance Stats -->
+        <div class="stats-grid">
+            <div>
+                <div class="stat-number">1,000+</div>
+                <div class="stat-label">Theses Completed</div>
+            </div>
+            <div>
+                <div class="stat-number">10,000+</div>
+                <div class="stat-label">Students Supported</div>
+            </div>
+            <div>
+                <div class="stat-number">95%</div>
+                <div class="stat-label">Client Satisfaction</div>
+            </div>
+        </div>
+
+        <!-- About Section -->
+        <section id="about" style="margin-bottom: 4rem;">
+            <h2 class="section-title">About Our Center</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto; font-size: 1.05rem;">
+                The Research & Thesis Support Center provides comprehensive academic support to researchers and higher-education students. From initial title refinement and proposal design to advanced data analysis and final manuscript formatting, we ensure high quality, research rigor, and timely execution[cite: 1].
+            </p>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services">
+            <h2 class="section-title">Our Key Services</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>📝 Research Proposal</h3>
+                    <ul>
+                        <li>Title Selection & Refinement</li>
+                        <li>Problem Statement Formulation</li>
+                        <li>Literature Review Development</li>
+                        <li>Study Methodology & Design</li>
+                        <li>Ethical Consideration Guidance</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>📚 Thesis & Dissertation</h3>
+                    <ul>
+                        <li>Chapter-by-Chapter Mentorship</li>
+                        <li>Content Review & Feedback</li>
+                        <li>Structural Flow Improvement</li>
+                        <li>Proofreading & Formatting</li>
+                        <li>Final Defense Preparation</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>📊 Data Analysis</h3>
+                    <ul>
+                        <li>Quantitative (SPSS, STATA, Excel)</li>
+                        <li>Qualitative (NVivo, Thematic)</li>
+                        <li>Statistical Interpretation</li>
+                        <li>Data Visualization & Charts</li>
+                        <li>Results & Discussion Writing</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>✍ Academic Editing</h3>
+                    <ul>
+                        <li>Grammar & Academic Tone</li>
+                        <li>Reference Styling (APA, Vancouver)</li>
+                        <li>Plagiarism Checking & Reduction</li>
+                        <li>Journal Article Formatting</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Expertise Areas -->
+        <section id="expertise">
+            <h2 class="section-title">Areas of Expertise</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>🏫 Business & Economics</h3>
+                    <p>Accounting, Auditing, Corporate Finance, Development Economics, Econometrics, Management, Marketing, and Project Management[cite: 1].</p>
+                </div>
+
+                <div class="card">
+                    <h3>🏥 Health Sciences</h3>
+                    <p>Public Health, Epidemiology, Nursing, Anesthesia, Pediatrics, Obstetrics & Gynecology, Psychiatry, and Health Informatics[cite: 1].</p>
+                </div>
+
+                <div class="card">
+                    <h3>📚 Social Sciences & More</h3>
+                    <p>Psychology, Sociology, Law, Environmental Science, and multidisciplinary research domains[cite: 1].</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Work Process -->
+        <section id="process">
+            <h2 class="section-title">Our Work Process</h2>
+            <div class="steps-container">
+                <div class="step-box">
+                    <div class="step-number">STEP 01</div>
+                    <h4>Consultation</h4>
+                    <p style="font-size: 0.9rem;">Initial discussion of requirements and project scope[cite: 1].</p>
+                </div>
+                <div class="step-box">
+                    <div class="step-number">STEP 02</div>
+                    <h4>Quote & Plan</h4>
+                    <p style="font-size: 0.9rem;">Agreement on clear deliverables, timeline, and rates[cite: 1].</p>
+                </div>
+                <div class="step-box">
+                    <div class="step-number">STEP 03</div>
+                    <h4>Execution</h4>
+                    <p style="font-size: 0.9rem;">Active research work with periodic updates provided[cite: 1].</p>
+                </div>
+                <div class="step-box">
+                    <div class="step-number">STEP 04</div>
+                    <h4>Review</h4>
+                    <p style="font-size: 0.9rem;">Draft submission followed by client revisions and feedback[cite: 1].</p>
+                </div>
+                <div class="step-box">
+                    <div class="step-number">STEP 05</div>
+                    <h4>Final Delivery</h4>
+                    <p style="font-size: 0.9rem;">Final delivery with post-service follow-up support[cite: 1].</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Form / CTA -->
+        <section id="contact">
+            <div class="contact-card">
+                <h2>Let’s Work Together</h2>
+                <p style="color: var(--text-muted);">Reach out directly to discuss your research paper or thesis requirements[cite: 1].</p>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <strong>Phone</strong>
+                        +251 972 661 028[cite: 1]
+                    </div>
+                    <div class="contact-item">
+                        <strong>Telegram Handle</strong>
+                        @Researcher_servicess[cite: 1]
+                    </div>
+                    <div class="contact-item">
+                        <strong>Telegram Channel</strong>
+                        <a href="https://t.me/+tjP08iEcaK9mY2Zk" target="_blank" style="color: var(--primary-color);">Join Channel</a>[cite: 1]
+                    </div>
+                    <div class="contact-item">
+                        <strong>Email Address</strong>
+                        nafhund@gmail.com[cite: 1]
+                    </div>
+                </div>
+
+                <a href="https://t.me/Researcher_servicess" class="btn btn-primary" target="_blank">Start Consultation on Telegram</a>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Research & Thesis Support Center. All rights reserved.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem;">Quality | Speed | Professionalism</p>[cite: 1]
+    </footer>
+
+</body>
+</html>
