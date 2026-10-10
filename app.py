@@ -7,7 +7,7 @@ from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandle
 # ============================================
 # ✏️ EDIT ONLY THESE 3 LINES
 # ============================================
-BOT_TOKEN    = "8666777791:AAEfGJe9lPLB9OzTWu6uFwmmaEDOg5Rp6s8"
+BOT_TOKEN    = "8666777791:AAFbYAzpOwVLHvbnLxiQqTvhEgWQC4qyKIw"
 CHANNEL_ID   = "@researcheraservice"
 CHANNEL_LINK = "https://t.me/+tjP08iEcaK9mY2Zk"
 # ============================================
