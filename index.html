@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <title>Research & Thesis Support Center | Quality, Speed & Professionalism</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -254,6 +255,12 @@
     </div>
 
     <script>
+        // Start the Telegram Mini App (safe to run in a normal browser too)
+        if (window.Telegram && Telegram.WebApp) {
+            Telegram.WebApp.ready();
+            Telegram.WebApp.expand();
+        }
+
         const files = [
             { id: 1, name: "Research Methodology Guide", date: "2026-01-15", size: "2.4 MB", category: "guide", tags: ["methodology"], description: "Comprehensive guide to research methodology.", fileName: "Research Methodology Guide.pdf" },
             { id: 2, name: "Thesis Writing Template", date: "2026-01-10", size: "1.8 MB", category: "template", tags: ["formatting"], description: "Ready-to-use template for thesis structure.", fileName: "Thesis Writing Template.pdf" },
@@ -275,6 +282,35 @@
             { id: 112, name: "Pharmacy Dept Research Papers", date: "2026-09-06", size: "68.5 MB", category: "department", tags: ["pharmacy", "pharmacology", "zip"], description: "Pharmacy department research papers archive.", fileName: "PHARMACY DEPT RESEARCH PAPER.zip" },
             { id: 113, name: "School of Commerce Research Papers", date: "2026-09-24", size: "6.6 MB", category: "department", tags: ["commerce", "business", "rar"], description: "School of Commerce research papers and studies collection.", fileName: "School of Commerce.rar" }
         ];
+
+        // ================================================================
+        // POST NUMBERS: the number of each file's post in your files channel
+        // (t.me/research_store_paper/NUMBER).
+        // How to get it: in the channel, right-click the file post ->
+        // "Copy Post Link". The number at the end of the link is the post number.
+        // Example: if the Nursing file is post 87, write   110: 87,
+        // Leave null until you know the number.
+        // ================================================================
+        const POST_IDS = {
+            1: null,
+            2: null,
+            3: null,
+            4: null,
+            11: null,
+            101: null,
+            102: null,
+            103: null,
+            104: null,
+            105: null,
+            106: null,
+            107: null,
+            108: null,
+            109: null,
+            110: null,
+            111: null,
+            112: null,
+            113: null
+        };
 
         let currentFilter = 'all';
         let currentSearch = '';
@@ -316,12 +352,19 @@
             `).join('');
         }
 
-        // ✅ UPDATED: Redirects to Telegram bot instead of downloading directly
+        // Opens the bot with the file's post number; the bot then sends that file.
         function handleDownload(fileTarget, fileId) {
-            // Send user to Telegram bot for channel verification
-            const botUsername = "Research_Support_Center_bot";
-            const botUrl = `https://t.me/${botUsername}?start=file_${fileId}`;
-            window.open(botUrl, '_blank');
+            const postId = POST_IDS[fileId];
+            if (!postId) {
+                alert("This file is being added. Please message @Researcher_servicess to get it.");
+                return;
+            }
+            const url = "https://t.me/Research_Support_Center_bot?start=f" + postId;
+            if (window.Telegram && Telegram.WebApp && Telegram.WebApp.initData) {
+                Telegram.WebApp.openTelegramLink(url);
+            } else {
+                window.open(url, "_blank");
+            }
         }
 
         function activateStep(stepId) { const el = document.getElementById(stepId); if (el) el.classList.add('active'); }
